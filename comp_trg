@@ -1,0 +1,54 @@
+#
+# Template for comp_trg file
+#
+# $Header: /files/home/dwight/itsmake/rcs/comp_trg.tpl 1.1 1994/07/26 21:06:38 dwight Exp dwight $
+
+#
+# put any special target you have for
+# executables and libraries that are
+# not built by the make system proper.
+#
+
+# here are some examples for building multiple targets
+
+# use this if executables have multiple object files (unix only)
+#
+#.IF $(SINGLE) == $(NULL)
+#FROMWAVE_MEMBERS=fromwave openwave
+#fromwave:
+#	[
+#	$(MAKE) COMP=$(COMP) SINGLE=yes EXE=fromwave COMP_EXE_MEMBERS="$(FROMWAVE_MEMBERS)" exe
+#	]
+#.END
+#
+#
+
+# (unix or dos)
+#
+#.IF $(SINGLE) == $(NULL)
+#FROMWAVE_MEMBERS=fromwave openwave
+#fromwave:
+#	[
+#.IF $(CMD_STYLE) == DOS
+#	set COMP_EXE_MEMBERS=$(FROMWAVE_MEMBERS)
+#	$(MAKE) COMP=$(COMP) SINGLE=yes EXE=fromwave exe
+#	set COMP_EXE_MEMBERS=
+#.ELSE
+#
+#	$(MAKE) COMP=$(COMP) SINGLE=yes EXE=fromwave COMP_EXE_MEMBERS="$(FROMWAVE_MEMBERS)" exe
+#.END
+#	]
+#.END
+	
+
+
+
+# use this if each executable contains one file, ie. foo.c -> foo (or foo.exe)
+#
+#.IF $(SINGLE) == $(NULL)
+#
+#$(EXES) : 
+#	$(MAKE) COMP=$(COMP) SINGLE=yes EXE=$@ COMP_EXE_MEMBERS=$(@:b) exe
+#	
+#
+#.END
